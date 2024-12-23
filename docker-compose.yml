@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    environment:
+      STORAGE_PATH: postgres://postgres:psqlpassword@db:5432/tokens_db?sslmode=disable
+      CONFIG_PATH: /config/local.yaml
+    depends_on:
+      - db
+    volumes:
+      - ./config:/config
+    restart: always
+
+  db:
+    image: postgres:14
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: psqlpassword
+      POSTGRES_DB: tokens_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:
