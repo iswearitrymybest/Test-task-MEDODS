@@ -29,6 +29,8 @@ Payload токенов должен содержать сведения об ip 
 
 
 **Описание выолнения:**
+
 Написан REST сервер с использованием GO, PostgreSQL, JWT и Docker-compose
 Весь проект запускается с помощью docker-compose командой:
+
 `docker-compose up`
